@@ -59,7 +59,7 @@ if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
 
 
-@route(/<x>/<y>)
+@route('/< x >/< y >')
 def handle_fire(int x, int y):
     """
     Receives fire request from the opponent and handles it accordingly

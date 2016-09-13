@@ -1,5 +1,6 @@
 import requests
 
+
 def fire(int x, int y):
     """
     Sends a fire request to the opponent's server
@@ -11,5 +12,5 @@ def fire(int x, int y):
     :type y: int
     :return: ?
     """
-    payload = {'x': x, 'y': y};
-    r = requests.post("localhost:5000", data = payload)
+    payload = {'x': x, 'y': y}:
+    r = requests.post("localhost:5000", payload)
