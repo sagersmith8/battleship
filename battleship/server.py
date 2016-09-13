@@ -3,7 +3,6 @@ from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
 
 
-
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
     extensions=['jinja2.ext.autoescape'])
@@ -58,6 +57,7 @@ def respond(template_file, params):
 
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
+
 
 @route(/<x>/<y>)
 def handle_fire(int x, int y):
