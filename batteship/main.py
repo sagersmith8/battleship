@@ -57,3 +57,17 @@ def respond(template_file, params):
 
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
+
+@post()
+def fire(int x, int y):
+    """
+    Is activated by clicking on a square in the GUI
+    Sends a fire request to the opponent with coordinates
+
+    :param x: the number of the column where the click happens
+    :type x: int
+    :param y: the number of the row where the click happens
+    :type y: int
+    :return: nothing?
+    """
+    
