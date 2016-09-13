@@ -1,6 +1,7 @@
 from bottle import route, run
 from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
+import requests
 
 
 JINJA_ENV = Environment(
@@ -58,16 +59,30 @@ def respond(template_file, params):
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
 
-@post()
+@route(/<x>/<y>)
+def handle_fire(int x, int y):
+    """
+    Receives fire request from the opponent and handles it accordingly
+        - Sends a response to the opponent
+
+    :param x: number of the column of the incomming attack
+    :type x: int
+    :param y: number of the row of the incomming attack
+    :type y: int
+    :return: ?
+    """
+    pass
+
 def fire(int x, int y):
     """
-    Is activated by clicking on a square in the GUI
-    Sends a fire request to the opponent with coordinates
+    Sends a fire request to the opponent's server
+    Gets a response from the server
 
-    :param x: the number of the column where the click happens
+    :param x: number of column that was selected by user
     :type x: int
-    :param y: the number of the row where the click happens
+    :param y: number of row that was selected by user
     :type y: int
-    :return: nothing?
+    :return: ?
     """
-    
+    payload = {'x': x, 'y': y};
+    r = requests.post("localhost:5000", data = payload)
