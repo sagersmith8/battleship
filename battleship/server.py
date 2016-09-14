@@ -1,19 +1,10 @@
 from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
-from bottle import route, run, request
+from bottle import route, run, request, error
 
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
     extensions=['jinja2.ext.autoescape'])
-
-
-@route('/', method='POST')
-def hello():
-    postdata = request.body.read()
-    print postdata  # this goes to log file only, not to client
-    x = request.forms.get("x")
-    y = request.forms.get("y")
-    return "Value is {},  {}".format(x, y)
 
 
 @route('/own_board.html')
@@ -53,21 +44,35 @@ def respond(template_file, params):
     return tpl.render(**params)
 
 
-if __name__ == '__main__':
-    run(host='localhost', port=5000, debug=True)
-
-
-@route('/<x>&<y>', method='POST')
-def handle_fire(x, y):
+@route('/', method='POST')
+def handle_fire():
     """
     Receives fire request from the opponent and handles it accordingly
         - Sends a response to the opponent
 
-    :param x: number of the column of the incomming attack
-    :type x: int
-    :param y: number of the row of the incomming attack
-    :type y: int
-    :return: ?
+    :return: "Value is x, y"
     """
-    print x, y
-    pass
+    postdata = request.body.read()
+    print postdata  # this goes to log file only, not to client
+    x = request.forms.get("x")
+    y = request.forms.get("y")
+    return "Value is {}, {}".format(x, y)
+
+
+@error(404)
+def handle_404():
+    print '404'
+
+
+@error(410)
+def handle_410():
+    print '410'
+
+
+@error(400)
+def handle_400():
+    print '400'
+
+
+if __name__ == '__main__':
+    run(host='localhost', port=5000, debug=True)

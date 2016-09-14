@@ -1,6 +1,5 @@
 import requests
 import logging
-from bottle import error
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +13,8 @@ def fire(x, y):
     :type x: int
     :param y: number of row that was selected by user
     :type y: int
-    :
+    :rtype: None
+    :return: No return, but sends a request
     """
     payload = {
         'x': x,
@@ -26,10 +26,5 @@ def fire(x, y):
     logger.debug("Made Request: {}".format(r))
 
 
-@error(405)
-def handle_error():
-    print 'poop'
-
-
 if __name__ == '__main__':
-    fire(3, 5)
+    pass
