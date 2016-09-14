@@ -50,13 +50,14 @@ def handle_fire():
     Receives fire request from the opponent and handles it accordingly
         - Sends a response to the opponent
 
+    :rtype: str
     :return: "Value is x, y"
     """
     postdata = request.body.read()
     print postdata  # this goes to log file only, not to client
-    x = request.forms.get("x")
-    y = request.forms.get("y")
-    return "Value is {}, {}".format(x, y)
+    x = request.forms.get('x')
+    y = request.forms.get('y')
+    return 'Value is {}, {}'.format(x, y)
 
 
 @error(404)
