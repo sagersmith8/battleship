@@ -4,6 +4,7 @@ from bottle import error
 
 logger = logging.getLogger(__name__)
 
+
 def fire(x, y):
     """
     Sends a fire request to the opponent's server
@@ -13,7 +14,7 @@ def fire(x, y):
     :type x: int
     :param y: number of row that was selected by user
     :type y: int
-    :return: ?
+    :
     """
     payload = {
         'x': x,
@@ -24,9 +25,11 @@ def fire(x, y):
     print r.text
     logger.debug("Made Request: {}".format(r))
 
+
 @error(405)
 def handle_error():
     print 'poop'
+
 
 if __name__ == '__main__':
     fire(3, 5)

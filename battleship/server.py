@@ -1,19 +1,16 @@
-from bottle import route, run
 from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
-
+from bottle import route, run, request
 
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
     extensions=['jinja2.ext.autoescape'])
 
 
-from bottle import route, run, request
-
 @route('/', method='POST')
 def hello():
     postdata = request.body.read()
-    print postdata #this goes to log file only, not to client
+    print postdata  # this goes to log file only, not to client
     x = request.forms.get("x")
     y = request.forms.get("y")
     return "Value is {},  {}".format(x, y)
@@ -54,6 +51,7 @@ def respond(template_file, params):
     """
     tpl = JINJA_ENV.get_template(template_file)
     return tpl.render(**params)
+
 
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
