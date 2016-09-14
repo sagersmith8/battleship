@@ -1,22 +1,10 @@
-from bottle import route, run
 from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
-
+from bottle import route, run, request, error
 
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
     extensions=['jinja2.ext.autoescape'])
-
-
-@route('/')
-def hello():
-    """
-    Welcomes the player to the game
-
-    :rtype: str
-    :return: Html string
-    """
-    return 'Welcome to battleship'
 
 
 @route('/own_board.html')
@@ -54,6 +42,38 @@ def respond(template_file, params):
     """
     tpl = JINJA_ENV.get_template(template_file)
     return tpl.render(**params)
+
+
+@route('/', method='POST')
+def handle_fire():
+    """
+    Receives fire request from the opponent and handles it accordingly
+        - Sends a response to the opponent
+
+    :rtype: str
+    :return: "Value is x, y"
+    """
+    postdata = request.body.read()
+    print postdata  # this goes to log file only, not to client
+    x = request.forms.get('x')
+    y = request.forms.get('y')
+    return 'Value is {}, {}'.format(x, y)
+
+
+@error(404)
+def handle_404():
+    print '404'
+
+
+@error(410)
+def handle_410():
+    print '410'
+
+
+@error(400)
+def handle_400():
+    print '400'
+
 
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
