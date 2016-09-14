@@ -8,15 +8,15 @@ JINJA_ENV = Environment(
     extensions=['jinja2.ext.autoescape'])
 
 
-@route('/')
-def hello():
-    """
-    Welcomes the player to the game
+from bottle import route, run, request
 
-    :rtype: str
-    :return: Html string
-    """
-    return 'Welcome to battleship'
+@route('/', method='POST')
+def hello():
+    postdata = request.body.read()
+    print postdata #this goes to log file only, not to client
+    x = request.forms.get("x")
+    y = request.forms.get("y")
+    return "Value is {},  {}".format(x, y)
 
 
 @route('/own_board.html')
@@ -59,8 +59,8 @@ if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
 
 
-@route('/< x >/< y >')
-def handle_fire(int x, int y):
+@route('/<x>&<y>', method='POST')
+def handle_fire(x, y):
     """
     Receives fire request from the opponent and handles it accordingly
         - Sends a response to the opponent
@@ -71,4 +71,5 @@ def handle_fire(int x, int y):
     :type y: int
     :return: ?
     """
+    print x, y
     pass

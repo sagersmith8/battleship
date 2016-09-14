@@ -1,7 +1,10 @@
 import requests
+import logging
+from bottle import error
 
+logger = logging.getLogger(__name__)
 
-def fire(int x, int y):
+def fire(x, y):
     """
     Sends a fire request to the opponent's server
     Gets a response from the server
@@ -12,5 +15,18 @@ def fire(int x, int y):
     :type y: int
     :return: ?
     """
-    payload = {'x': x, 'y': y}:
-    r = requests.post("localhost:5000", payload)
+    payload = {
+        'x': x,
+        'y': y
+    }
+
+    r = requests.post('http://localhost:5000/', payload)
+    print r.text
+    logger.debug("Made Request: {}".format(r))
+
+@error(405)
+def handle_error():
+    print 'poop'
+
+if __name__ == '__main__':
+    fire(3, 5)
