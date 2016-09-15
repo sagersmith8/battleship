@@ -99,4 +99,4 @@ if __name__ == '__main__':
     port = sys.argv[1]
     armada = Armada(sys.argv[2])
     print_armada()
-    run(host='localhost', port=5000, debug=True)
+    run(host='localhost', port=int(port), debug=True)
