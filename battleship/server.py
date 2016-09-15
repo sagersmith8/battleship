@@ -61,7 +61,11 @@ def handle_fire():
     point = (int(x), int(y))
     hit = armada.check_hit(point)
     print 'Fired at', point, hit
-    return 'hit={}'.format(hit) if str(hit) not in 'CBRSD' else 'hit=1&sink={}'.format(hit)
+    return (
+        'hit={}'.format(hit)
+        if str(hit) not in 'CBRSD'
+        else 'hit=1&sink={}'.format(hit)
+    )
 
 
 @error(404)
@@ -81,7 +85,10 @@ def handle_400():
 
 def print_armada():
     for ship in armada.ships:
-        print 'Ship {}'.format(ship), 'Location: {}'.format(armada.ships[ship].location)
+        print (
+            'Ship {}'.format(ship),
+            'Location: {}'.format(armada.ships[ship].location)
+        )
 
 if __name__ == '__main__':
     port = sys.argv[1]
