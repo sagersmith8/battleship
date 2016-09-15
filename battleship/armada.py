@@ -8,8 +8,8 @@ class Armada:
         lines = []
         file_path = os.path.join(path)
         with open(file_path, 'r') as file_name:
-            lines.append(file_name.readlines())
-        for i, line in enumerate(lines[0]):
+            lines = file_name.readlines()
+        for i, line in enumerate(lines):
             for j, char in enumerate(line):
                 if char in 'BDRCS':
                     ship = self.ships.get(char)
