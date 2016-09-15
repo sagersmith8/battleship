@@ -31,6 +31,7 @@ class Armada:
             status = self.ships[ship].check_hit(point)
             if status == 2:
                 self.ships.pop(ship)
-            if status > 0:
+                return ship
+            if status == 1:
                 return status
         return 0

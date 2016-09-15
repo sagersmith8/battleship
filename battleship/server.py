@@ -61,7 +61,7 @@ def handle_fire():
     point = (int(x), int(y))
     hit = armada.check_hit(point)
     print 'Fired at', point, hit
-    return str(hit)
+    return 'hit={}'.format(hit) if str(hit) not in 'CBRSD' else 'hit=1&sink={}'.format(hit)
 
 
 @error(404)
