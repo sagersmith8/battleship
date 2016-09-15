@@ -1,8 +1,9 @@
-from jinja2 import Environment, FileSystemLoader
-from os.path import dirname
-from bottle import route, run, request, error
 import sys
-from armada import Armada
+from os.path import dirname
+
+from bottle import route, run, request, error
+from jinja2 import Environment, FileSystemLoader
+from battleship.model.armada import Armada
 
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),

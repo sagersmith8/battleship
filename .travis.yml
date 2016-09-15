@@ -9,3 +9,4 @@ notifications:
 script:
  - nosetests tests
  - flake8 .
+ - codecov
