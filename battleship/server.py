@@ -1,6 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
 from os.path import dirname
 from bottle import route, run, request, error
+import sys
+from armada import Armada
 
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
@@ -53,11 +55,16 @@ def handle_fire():
     :rtype: str
     :return: "Value is x, y"
     """
-    postdata = request.body.read()
-    print postdata  # this goes to log file only, not to client
     x = request.forms.get('x')
     y = request.forms.get('y')
-    return 'Value is {}, {}'.format(x, y)
+    point = (int(x), int(y))
+    hit = armada.check_hit(point)
+    print 'Fired at', point, hit
+    return (
+        'hit={}'.format(hit)
+        if str(hit) not in 'CBRSD'
+        else 'hit=1&sink={}'.format(hit)
+    )
 
 
 @error(404)
@@ -75,5 +82,21 @@ def handle_400():
     print '400'
 
 
+def print_armada():
+    """
+    Prints the armada location
+
+    :rtype: None
+    :return: No return but prints ship locations
+    """
+    for ship in armada.ships:
+        print (
+            'Ship {}'.format(ship),
+            'Location: {}'.format(armada.ships[ship].location)
+        )
+
 if __name__ == '__main__':
-    run(host='localhost', port=5000, debug=True)
+    port = sys.argv[1]
+    armada = Armada(sys.argv[2])
+    print_armada()
+    run(host='localhost', port=int(port), debug=True)
