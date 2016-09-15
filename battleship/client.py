@@ -22,9 +22,11 @@ def fire(x, y):
     }
 
     r = requests.post('http://localhost:5000/', payload)
-    print r.text
     logger.debug('Made Request: {}'.format(r))
+    return r.text
 
 
 if __name__ == '__main__':
-    pass
+    while True:
+        location = raw_input().split(' ')
+        print fire(*location)
