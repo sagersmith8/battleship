@@ -7,7 +7,6 @@ from armada import Armada
 JINJA_ENV = Environment(
     loader=FileSystemLoader(dirname(__file__) + '/templates/'),
     extensions=['jinja2.ext.autoescape'])
-points_checked = set()
 
 
 @route('/own_board.html')
@@ -84,6 +83,12 @@ def handle_400():
 
 
 def print_armada():
+    """
+    Prints the armada location
+
+    :rtype: None
+    :return: No return but prints ship locations
+    """
     for ship in armada.ships:
         print (
             'Ship {}'.format(ship),
