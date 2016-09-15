@@ -25,7 +25,7 @@ class Armada:
         :param point: point to check
         :type point: tuple(int, int)
         :rtype: int
-        :return: 2 if a ship was hit and sunk, 1 if a ship was hit, 0 if miss
+        :return: Name of ship was hit and sunk, 1 if a ship was hit, 0 if miss
         """
         for ship in self.ships:
             status = self.ships[ship].check_hit(point)
