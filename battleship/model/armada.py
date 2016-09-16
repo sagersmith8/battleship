@@ -15,9 +15,9 @@ class Armada:
                 if char in 'BDRCS':
                     ship = self.ships.get(char)
                     if ship:
-                        ship.location.append((i, j))
+                        ship.location.append((j, i))
                     else:
-                        self.ships[char] = Ship([(i, j)])
+                        self.ships[char] = Ship([(j, i)])
 
     def check_hit(self, point):
         """
