@@ -1,11 +1,12 @@
-from ship import Ship
 import os
+
+from ..model.ship import Ship
 
 
 class Armada:
     def __init__(self, path):
         self.ships = {}
-        lines = []
+
         file_path = os.path.join(path)
         with open(file_path, 'r') as file_name:
             lines = file_name.readlines()

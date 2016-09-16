@@ -1,5 +1,6 @@
 import unittest
-from battleship import server
+
+from battleship.web import server
 
 
 class TestServer(unittest.TestCase):
