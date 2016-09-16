@@ -5,6 +5,9 @@ from battleship.model.armada import Armada
 
 class TestArmada(unittest.TestCase):
     def setUp(self):
+        """
+        Sets up unit tests for armada
+        """
         self.path = os.path.join('resources', 'sample_board.txt')
         self.ships = {
             'B': [(0, 0), (0, 1), (0, 2)],
@@ -13,6 +16,9 @@ class TestArmada(unittest.TestCase):
         }
 
     def test_init(self):
+        """
+        Tests init for armada
+        """
         armada = Armada(self.path)
         self.assertEqual(armada.ships.keys(), self.ships.keys())
 
@@ -23,13 +29,32 @@ class TestArmada(unittest.TestCase):
                 self.ships.get(ship)
             )
 
-    def test_check_hit(self):
+    def test_miss(self):
+        """
+        Tests that an armada isn't always hit
+        """
         armada = Armada(self.path)
-        misses = [(x, y) for x in range(9) for y in range(9)]
-        for l in self.ships.values():
-            for val in l:
-                print val
-                misses.remove(val)
-                self.assertTrue(str(armada.check_hit(val)) in '01BDRCS')
-        for miss in misses:
-            self.assertEqual(0, armada.check_hit(miss))
+        self.assertEqual(0, armada.check_hit((5, 5)))
+        self.assertEqual(3, len(armada.ships))
+
+    def test_hit(self):
+        """
+        Tests that a ship is hit, but can't be hit twice at the same point
+        """
+        armada = Armada(self.path)
+        self.assertEqual(1, armada.check_hit((0, 0)))
+        self.assertEqual(0, armada.check_hit((0, 0)))
+        self.assertEqual(3, len(armada.ships))
+
+    def test_sink(self):
+        """
+        Tests that a ship can sink and that once it does it is removed
+        from the armada
+        """
+        armada = Armada(self.path)
+        self.assertEqual(1, armada.check_hit((0, 0)))
+        self.assertEqual(3, len(armada.ships))
+        self.assertEqual(1, armada.check_hit((0, 1)))
+        self.assertEqual(3, len(armada.ships))
+        self.assertEqual('B', armada.check_hit((0, 2)))
+        self.assertEqual(2, len(armada.ships))
