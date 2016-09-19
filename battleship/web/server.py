@@ -1,13 +1,28 @@
 import sys
 from os.path import dirname
-
-from bottle import route, run, request, error
+import time
+from bottle import route, run, request, error, static_file
 from jinja2 import Environment, FileSystemLoader
 from battleship.model.armada import Armada
 
 JINJA_ENV = Environment(
-    loader=FileSystemLoader(dirname(__file__) + '/templates/'),
-    extensions=['jinja2.ext.autoescape'])
+    loader=FileSystemLoader(dirname(dirname(dirname(__file__)))+'/templates/'),
+    extensions=['jinja2.ext.autoescape']
+)
+
+
+enemy_board = []
+for row in xrange(10):
+    enemy_board.append([])
+    for col in xrange(10):
+        enemy_board[row].append(0)
+print enemy_board
+
+
+@route('/static/<file>')
+def serve_file(file):
+    file_name = dirname(dirname(dirname(__file__)))+'/static'
+    return static_file(file, root=file_name)
 
 
 @route('/own_board.html')
@@ -18,7 +33,13 @@ def own_board():
     :rtype: str
     :return: Html string
     """
-    return 'my own board'
+    return respond(
+        'own_board.html',
+        {
+            'armada': armada
+        }
+
+    )
 
 
 @route('/opponent_board.html')
@@ -29,7 +50,12 @@ def opponent_board():
     :rtype: str
     :return: Html string
     """
-    return 'their board yo'
+    return respond(
+        'opponent_board.html',
+        {
+            'board': enemy_board
+        }
+    )
 
 
 def respond(template_file, params):
@@ -68,13 +94,32 @@ def handle_fire():
     )
 
 
+@route('/update_board', method='POST')
+def update_board():
+    """
+    Receives fire request from the opponent and handles it accordingly
+        - Sends a response to the opponent
+
+    :rtype: str
+    :return: "Value is x, y"
+    """
+    x = int(request.forms.get('x'))
+    y = int(request.forms.get('y'))
+    shot = int(request.forms.get('shot'))
+    enemy_board[y][x] = shot
+    time.sleep(1)
+    return (
+        'Updated board'
+    )
+
+
 @error(404)
-def handle_404():
+def handle_404(*args):
     print '404'
 
 
 @error(410)
-def handle_410():
+def handle_410(*args):
     print '410'
 
 
@@ -83,7 +128,7 @@ def handle_400():
     print '400'
 
 
-def print_armada():
+def print_armada(*args):
     """
     Prints the armada location
 

@@ -1,0 +1,23 @@
+{%extends "board.html"%}
+
+{%block title%}Own Board{%endblock%}
+
+{% block extrastyle %}
+{% endblock %}
+
+{%block body%}
+ <div class="table" >
+     {% for row in board %}
+     <div class="row" >
+         {% for col in row %}
+         <div class="cell" >
+             {{col}}
+         </div>
+         {% endfor %}
+     </div>
+     {% endfor %}
+ </div>
+{%endblock%}
+
+{%block extrascripts%}
+{%endblock%}
