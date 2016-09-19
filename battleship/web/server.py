@@ -1,9 +1,8 @@
 import sys
-from os.path import dirname, abspath
+from os.path import dirname
 import time
 from bottle import route, run, request, error, static_file
 from jinja2 import Environment, FileSystemLoader
-from flask import url_for
 from battleship.model.armada import Armada
 
 JINJA_ENV = Environment(
