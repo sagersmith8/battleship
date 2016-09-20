@@ -44,11 +44,11 @@ def own_board():
         {
             'board': board,
             'background_image': {
-                'C': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_topdownviewofprostarskiboatbymastercraft.png',
-                'B': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_topdownviewofmastercraftsx35boatmodel.png',
-                'S': 'http://stoneycreekcreative.com/bayarea/wp-content/uploads/2013/10/X30_top_profile.png',
-                'D': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_xstartopdownviewshowinglayoutofboat-mastercraft.png',
-                'R': 'http://www.onlyinboards.com/getmetafile/4b337fef-c357-4695-825d-130bdfc16df2/2012-Centurion-Enzo-SV244.aspx'
+                'C': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_topdownviewofprostarskiboatbymastercraft.png',  # NOQA
+                'B': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_topdownviewofmastercraftsx35boatmodel.png',  # NOQA
+                'S': 'http://stoneycreekcreative.com/bayarea/wp-content/uploads/2013/10/X30_top_profile.png',  # NOQA
+                'D': 'http://www.iboats.com/sites/mastercraft/site_page_19088/images/l_xstartopdownviewshowinglayoutofboat-mastercraft.png',  # NOQA
+                'R': 'http://www.onlyinboards.com/getmetafile/4b337fef-c357-4695-825d-130bdfc16df2/2012-Centurion-Enzo-SV244.aspx'  # NOQA
             }
         }
     )
