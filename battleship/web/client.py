@@ -26,11 +26,12 @@ def fire(ip, port, x, y):
         'y': y
     }
 
+    print 'info', ip, port, payload
     fire_request = requests.post('http://{}:{}/'.format(ip, port), payload)
     info = fire_request.text.rfind('=')
     payload['shot'] = fire_request.text[info+1:]
     update_board_request = requests.post(
-        'http://localhost:5000/update_board', payload
+        'http://0.0.0.0:5000/update_board', payload
     )
     print fire_request.text
     print update_board_request.text
