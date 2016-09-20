@@ -1,6 +1,6 @@
 {%extends "board.html"%}
 
-{%block title%}Own Board{%endblock%}
+{%block title%}Opponent Board{%endblock%}
 
 {% block extrastyle %}
 {% endblock %}
@@ -10,8 +10,13 @@
      {% for row in board %}
      <div class="row" >
          {% for col in row %}
+         {%if col == -1%}
          <div class="cell" >
-             {{col}}
+             {%elif col >0%}
+             <div class="cell" id="occupied">
+             {%else%}
+             <div class = "cell" id="unoccupied">
+             {%endif%}
          </div>
          {% endfor %}
      </div>

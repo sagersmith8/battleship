@@ -1,24 +1,41 @@
+body{
+    background-image: url("http://www.netanimations.net/water_waves_ocean_ripple_high_quality_animated_gif.gif");
+    display: block;
+}
+
 .table {
     display: table;
-    background-color: navy;
-    width:100%;
+    width:70%;
     height: 100%;
-    margin:0;
-    padding:0;
+    margin: 100px auto;
+    padding:0px;
+    border: green 2px;
+    border-style: solid;
 }
 
 .row {
     display:table-row;
-    margin:0;
-    padding:0;
 }
 
 .cell {
     display:table-cell;
     width: 25px;
     height: 25px;
-    background-color: ghostwhite;
-    margin:0;
-    padding:0;
+    padding:20px;
     text-align: center;
+    border: green 2px;
+    border-style: solid;
+}
+
+#unoccupied.cell {
+    background-color: white;
+    opacity: .5;
+}
+
+#occupied.cell {
+    background-image: url("https://67.media.tumblr.com/094fb02872cca96df4917e9c97658fed/tumblr_nu2bt4HEls1twd8ddo1_500.gif");
+    background-size: 110px 60px;
+}
+
+#ship{
 }

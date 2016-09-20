@@ -6,12 +6,19 @@
 {% endblock %}
 
 {%block body%}
- <div class="table" id="earring-table">
+ <div class="table">
      {% for row in board %}
      <div class="row">
          {% for col in row %}
+         {%if col == -1%}
          <div class="cell">
-             {{col}}
+         {%elif col == 1%}
+         <div class="cell" id = "occupied">
+         {%elif col == 0%}
+         <div class = "cell" id = "unoccupied">
+         {%else%}
+         <div class="cell" id = "ship" style="background-image: url({{background_image[col]}}); background-repeat: no-repeat; background-size: auto 60px; background-position: center; ">
+         {%endif%}
          </div>
          {% endfor %}
      </div>
