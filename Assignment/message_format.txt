@@ -1,0 +1,11 @@
+Miss = 0
+Hit = 1
+Sink = 2
+Ship Codes = C, B, R, S, D
+Error Codes = 400, 404, 310
+
+Client sends messages to server with x=<x_val>&y=<y_val> in the header
+Server sends message with code if error
+Server sends message code 200 with hit=Miss if a miss
+Server sends message code 200 with hit=Hit if a hit and not a sink
+Server sends message code 200 with hit=Sink&sunk=Ship Code if a sink
