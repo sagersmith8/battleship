@@ -1,6 +1,5 @@
 import sys
 from os.path import dirname
-import time
 from bottle import route, run, request, error, static_file, HTTPError
 from jinja2 import Environment, FileSystemLoader
 from battleship.model.armada import Armada
@@ -111,7 +110,9 @@ def handle_fire():
     point = (x, y)
     if board[y][x] in [1, 0]:
         print '410'
-        return HTTPError(410, reason='This square has already been attacked, nerd.')
+        return HTTPError(
+            410, reason='This square has already been attacked, nerd.'
+        )
     hit = armada.check_hit(point)
     if str(hit) not in 'CBRSD':
         board[y][x] = hit
