@@ -30,6 +30,30 @@ Artificial intelligence project to color graphs
 
 2. `$ pip install requirements.txt`
 
+#### Playing the game
+
+##### Starting you server
+
+From the root directory of your project
+    
+    $ cd battleship/web
+    $ python server.py <their_port> <path_to_board>
+    
+Note: Your board should be 10 lines of length 10 characters
+use `_` to denote nothing and the appropiate letter to represent a ship
+    
+##### Attacking with your client
+
+    $ python client <their_ip> <their_port> <x> <y>
+    
+##### Viewing your board
+
+In your browser view `localhost:<port>/own_board.html`
+
+##### Viewing your opponent's board
+
+In your browser view `localhost:<port>/opponent_board.html`
+
 ### Local Development
 
 #### Adding a git hook
