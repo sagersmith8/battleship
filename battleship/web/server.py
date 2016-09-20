@@ -187,4 +187,4 @@ if __name__ == '__main__':
         for location in armada.ships[ship].location:
             board[location[1]][location[0]] = ship
     print_armada()
-    run(host='localhost', port=int(port), debug=True)
+    run(host='0.0.0.0', port=int(port), debug=True)
